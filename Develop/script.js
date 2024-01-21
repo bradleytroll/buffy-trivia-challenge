@@ -126,6 +126,7 @@ var message = document.getElementById("correct-incorrect-message");
 var scoreDiv = document.getElementById("high-score-div");
 var correctSound = document.getElementById("correctSound");
 var incorrectSound = document.getElementById("incorrectSound");
+var introSound = document.getElementById("loadSound")
 
 // Creates beginning timer count
 var timer;
