@@ -180,6 +180,8 @@ function startQuestions() {
     var currentQuestion = questions[currentQuestionIndex];
     questionTxt.innerText = currentQuestion.question;
     // Creates buttons for each answer choice by iterating through a forEach loop, appends the buttons to the DOM, and fires a function to check whether or not the answer chosen is correct.
+    
+    
     answerEl.innerHTML = "";
     currentQuestion.options.forEach(function(answer, index) {
         var answerBtn = document.createElement("button");
@@ -301,6 +303,11 @@ function postFinalScore() {
 
 // Creates a funciton to display high scores array, which has already been sorted by score.
 function displayHighScores() {
+    var slayText = document.createElement("div");
+    slayText.textContent = "You're ready to slay!";
+    slayText.style.fontSize = "36px";
+    slayText.style.fontWeight = "bold";
+    document.getElementById("question-div").appendChild(slayText);
     scoreDiv.innerHTML = "<h2>Top 10 High Scores</h2>";
     // Creates a list for the high score array objects.
     var list = document.createElement("ol");
@@ -319,3 +326,4 @@ function displayHighScores() {
         location.reload();
     });
 };
+
