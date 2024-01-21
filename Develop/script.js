@@ -179,6 +179,7 @@ function startQuestions() {
         });
         answerEl.appendChild(answerBtn);
     })
+    startBtn.remove();
 };
 
 // Compares the user-chosen answer to the correct answer indext to determine if the answer is correct or incorrect and act accordingly.
@@ -186,24 +187,39 @@ function checkAnswer(index) {
     var currentQuestion = questions[currentQuestionIndex];
     if (index === currentQuestion.correctIndex) {
         quizScore++;
+        showCorrect();
     } else {
-        message.textContent = "Incorrect"
         timerCount -= 10;
-    }
-    showResult()
+        showIncorrect();
+    };
+    
 }
 
-function showResult() {
+function showCorrect() {
     message.textContent = "Correct!"
     currentScore.textContent = "Current Score: " + quizScore;
     setTimeout(function()  {
         message.textContent = "";
-    }, 3000);
-    nextQuestion()
+    }, 5000);
+    nextQuestion();
+}
+
+function showIncorrect() {
+    message.textContent = "Incorrect. You've lost 10 seconds!"
+    currentScore.textContent = "Current Score: " + quizScore;
+    setTimeout(function() {
+        message.textContent = "";
+    }, 5000);
+    nextQuestion();
 }
 
 function nextQuestion() {
-    console.log("hi")
+    currentQuestionIndex++;
+    if (currentQuestionIndex < questions.length) {
+        startQuestions();
+    } else {
+        endQuiz();
+    }
 }
 
 function endQuiz() {
