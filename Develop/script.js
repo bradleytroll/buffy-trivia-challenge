@@ -112,13 +112,16 @@ var questions = [
     },
 ];
 
-console.log(questions.length)
+
 // Grabs elements and assign variables
 var questionEl = document.getElementById("question-div");
-var startBtn = document.getElementById("start-button")
-var timerEl = document.getElementById("timer-element")
-var answerEl = document.getElementById("answer-options")
-var questionTxt = document.getElementById("question")
+var startBtn = document.getElementById("start-button");
+var timerEl = document.getElementById("timer-element");
+var answerEl = document.getElementById("answer-options");
+var questionTxt = document.getElementById("question");
+var scoreEl = document.getElementById("score");
+var currentScore = document.getElementById("current-score");
+var result = document.getElementById("result-message");
 
 // Creates beginning timer count
 var timer;
@@ -126,6 +129,9 @@ timerCount = 70;
 
 // Creates starting quesiton count
 var currentQuestionIndex = 0;
+
+// Creates beginning score
+var quizScore = 0;
 
 // Adds event listeners
 startBtn.addEventListener("click", startQuiz);
@@ -142,7 +148,7 @@ function startQuiz(event) {
 };
 
 
-// Adds basic timer to the div.
+// Funciton starts and appends basic timer to the DOM. If the timer count is above zero, it will begin to reduce the timer count by one every second. Once the timer count is equal to zero, the timer clears and a message appears telling the user that time is up. 
 function startTimer() {
   timer = setInterval(function() {
     if (timerCount > 0) {
@@ -157,10 +163,12 @@ function startTimer() {
    }, 1000);
 };
 
+// Function displays the first question and answer buttons to the DOM.
 function startQuestions() {
-    console.log("questions")
+    // Sets the current question based on the index in the questions array. Appends the text of the question to the DOM.
     var currentQuestion = questions[currentQuestionIndex];
     questionTxt.innerText = currentQuestion.question;
+    // Creates buttons for each answer choice by iterating through a forEach loop, appends the buttons to the DOM, and fires a function to check whether or not the answer chosen is correct.
     answerEl.innerHTML = "";
     currentQuestion.options.forEach(function(answer, index) {
         var answerBtn = document.createElement("button");
@@ -170,13 +178,24 @@ function startQuestions() {
         });
         answerEl.appendChild(answerBtn);
     })
-
 };
+
+// Compares the user-chosen answer to the correct answer indext to determine if the answer is correct or incorrect and act accordingly.
+function checkAnswer(index) {
+    var currentQuestion = questions[currentQuestionIndex];
+    if (index === currentQuestion.correctIndex) {
+        quizScore++;
+    } else {
+        timerCount -= 10;
+    }
+    showResult()
+}
+
+function showResult() {
+    currentScore.textContent = "Current Score: " + quizScore;
+}
 
 function endQuiz() {
     console.log('timer ended')
 };
 
-function checkAnswer() {
-    console.log("check answer", index)
-}
