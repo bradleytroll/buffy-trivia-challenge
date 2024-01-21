@@ -122,6 +122,7 @@ var questionTxt = document.getElementById("question");
 var scoreEl = document.getElementById("score");
 var currentScore = document.getElementById("current-score");
 var result = document.getElementById("result-message");
+var message = document.getElementById("correct-incorrect-message")
 
 // Creates beginning timer count
 var timer;
@@ -186,13 +187,23 @@ function checkAnswer(index) {
     if (index === currentQuestion.correctIndex) {
         quizScore++;
     } else {
+        message.textContent = "Incorrect"
         timerCount -= 10;
     }
     showResult()
 }
 
 function showResult() {
+    message.textContent = "Correct!"
     currentScore.textContent = "Current Score: " + quizScore;
+    setTimeout(function()  {
+        message.textContent = "";
+    }, 3000);
+    nextQuestion()
+}
+
+function nextQuestion() {
+    console.log("hi")
 }
 
 function endQuiz() {
