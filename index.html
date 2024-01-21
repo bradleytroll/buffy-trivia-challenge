@@ -9,7 +9,7 @@
 
 <body>
 <h1 id="title">Buffy the Vampire Slayer Quiz</h1>
-    <div id="timer-element"></div>
+    
     <div id="question-div">
         <h3 id="question">Welcome potential slayers! It's time to prove your worthiness to the Watcher's Council. Click start to test your knowledge of all things Buffy-verse!</h3>
         <button id="start-button">Start Quiz</button>
@@ -20,6 +20,7 @@
 
         
     </div>
+    <div id="timer-element">Timer</div>
     <div id="score">
     <h3 id="current-score">Current Score: </h3>
     <p id="result-message"></p>
@@ -31,7 +32,8 @@
     </div>
     
     
-    
+    <audio id="correctSound" src="./Develop/Assets/b-beepme.wav"></audio>
+<audio id="incorrectSound" src="./Develop/Assets/b-huh2.wav"></audio>
     <script src="./Develop/script.js"></script>
 </body>
 

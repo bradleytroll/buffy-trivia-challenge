@@ -1,35 +1,59 @@
 body {
     text-align: center;
-    background-color: gray;
+    background-image:  url(./Assets/d919f66c7249971d1586120f19a428592b21d2e26a967ad3d36d093eb1cfa127._RI_TTW_.jpg);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 button {
     border-radius: 5px;
     font-size: 25px;
-   
+    font-style: italic;
+    margin: 5px;
+    background-color: rgb(107, 8, 8);
+    color: white;
 }
 
 #title {
-    background-color: rgb(107, 8, 8);
+    font-weight: bold; 
+    background-color: rgba(128, 128, 128, 0.8); 
     padding: 40px;
-    color: white;
+    color: rgb(107, 8, 8);
     border-radius: 5px;
     margin-left: 150px;
     margin-right: 100px;
-    margin-top: 10px;
+   
+    border: 5px;
+    border-color: black;
+    border-style: solid; 
+}
+
+#question-div {
+    font-weight: bold; 
+    background-color: rgba(128, 128, 128, 0.8); 
+    padding: 40px;
+    color: rgb(107, 8, 8);
+    border-radius: 5px;
+    margin-left: 150px;
+    margin-right: 100px;
+   
     border: 5px;
     border-color: black;
     border-style: solid; 
 }
 
 #timer-element {
-    padding: 40px;
+    padding: 5px;
     color: white;
     border-radius: 5px;
     margin-left: 150px;
     margin-right: 100px;
-    margin-top: 10px;
+    background-color: gray;
     font-size: 20px;
+    border: 5px;
+    border-color: black;
+    border-style: solid; 
 }
 
 #question {
@@ -49,10 +73,21 @@ button {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-weight: bold; 
+    background-color: rgba(128, 128, 128, 0.8); 
+    padding: 40px;
+    color: rgb(107, 8, 8);
+    border-radius: 5px;
+    margin-left: 150px;
+    margin-right: 100px;
+   
+    border: 5px;
+    border-color: black;
+    border-style: solid; 
 }
 
 #score {
-    background-color: rgb(107, 8, 8);
+    background-color: rgb(107, 8, 8, 0.8);
     padding: 40px;
     color: white;
     border-radius: 5px;

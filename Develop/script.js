@@ -42,7 +42,7 @@ var questions = [
     },
     {
         question: "What is the name of Giles' lifelong rival?",
-        options: ["Ethan Rayne", "Wesley Wyndham Price", "Tara Maclay", "O4"],
+        options: ["Ethan Rayne", "Wesley Wyndham Price", "Tara Maclay", "Quentin Travers"],
         correctIndex: 0
     },
     {
@@ -124,6 +124,8 @@ var currentScore = document.getElementById("current-score");
 var result = document.getElementById("result-message");
 var message = document.getElementById("correct-incorrect-message");
 var scoreDiv = document.getElementById("high-score-div");
+var correctSound = document.getElementById("correctSound");
+var incorrectSound = document.getElementById("incorrectSound");
 
 // Creates beginning timer count
 var timer;
@@ -146,7 +148,7 @@ startBtn.addEventListener("click", startQuiz);
 
 // Adds a function to the start button that, when clicked, fires two new functions: one to begin the timer, and one to display the first question.
 function startQuiz(event) {
-    timercount = 70;
+    timerCount = 70;
     currentQuestionIndex = 0;
     quizScore = 0;
     timerEl.textContent = "Seconds Remaining: " + timerCount;
@@ -213,6 +215,7 @@ function checkAnswer(index) {
 function showCorrect() {
     message.textContent = "Correct!"
     currentScore.textContent = "Current Score: " + quizScore;
+    correctSound.play();
     setTimeout(function()  {
         message.textContent = "";
     }, 5000);
@@ -223,6 +226,7 @@ function showCorrect() {
 function showIncorrect() {
     message.textContent = "Incorrect. You've lost 10 seconds!"
     currentScore.textContent = "Current Score: " + quizScore;
+    incorrectSound.play();
     setTimeout(function() {
         message.textContent = "";
     }, 5000);
