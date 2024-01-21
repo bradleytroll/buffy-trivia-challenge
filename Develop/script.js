@@ -122,7 +122,8 @@ var questionTxt = document.getElementById("question");
 var scoreEl = document.getElementById("score");
 var currentScore = document.getElementById("current-score");
 var result = document.getElementById("result-message");
-var message = document.getElementById("correct-incorrect-message")
+var message = document.getElementById("correct-incorrect-message");
+var scoreDiv = document.getElementById("high-score-div");
 
 // Creates beginning timer count
 var timer;
@@ -134,7 +135,10 @@ var currentQuestionIndex = 0;
 // Creates beginning score
 var quizScore = 0;
 
-// Adds event listeners
+// Creates an empty array to score high scores
+var highScores = [];
+
+// Adds event listeners to start button to begin the quiz
 startBtn.addEventListener("click", startQuiz);
 
 
@@ -142,9 +146,13 @@ startBtn.addEventListener("click", startQuiz);
 
 // Adds a function to the start button that, when clicked, fires two new functions: one to begin the timer, and one to display the first question.
 function startQuiz(event) {
+    timercount = 70;
+    currentQuestionIndex = 0;
+    quizScore = 0;
+    timerEl.textContent = "Seconds Remaining: " + timerCount;
     if (!timer) {
-    startTimer();
-    startQuestions();
+        startTimer();
+        startQuestions();
     }
 };
 
@@ -185,12 +193,15 @@ function startQuestions() {
 // Compares the user-chosen answer to the correct answer indext to determine if the answer is correct or incorrect and act accordingly.
 function checkAnswer(index) {
     var currentQuestion = questions[currentQuestionIndex];
+    // If user gets correct answer, the score increases and a correct message is shown.
     if (index === currentQuestion.correctIndex) {
         quizScore++;
         showCorrect();
+    // If the user gets an incorrect answer and there are more than 10 seconds remaining, an incorrect message is shown.
     } else if (timerCount >= 10) {
         timerCount -= 10;
         showIncorrect();
+    // If the timer has less than 10 seconds and the ansewr is incorrect, the game will end.
     } else if (timerCount < 10) {
         clearInterval(timer);
         timerEl.textContent = "Time's Up!"
@@ -198,7 +209,7 @@ function checkAnswer(index) {
     }
     };
     
-
+// Shows a message confirming the user chose a correct answer which times out after 5 seconds. Then, the quiz proceeds to the next question.
 function showCorrect() {
     message.textContent = "Correct!"
     currentScore.textContent = "Current Score: " + quizScore;
@@ -208,6 +219,7 @@ function showCorrect() {
     nextQuestion();
 }
 
+// Shows a message confirming the user chose an incorrect answer which times out after 5 seconds. Then, the quiz proceeds to the next question.
 function showIncorrect() {
     message.textContent = "Incorrect. You've lost 10 seconds!"
     currentScore.textContent = "Current Score: " + quizScore;
@@ -217,6 +229,7 @@ function showIncorrect() {
     nextQuestion();
 }
 
+// Creates a function to progress to the next question or, if there are no questions remaining, to end the quiz.
 function nextQuestion() {
     currentQuestionIndex++;
     if (currentQuestionIndex < questions.length) {
@@ -226,9 +239,68 @@ function nextQuestion() {
     }
 }
 
+// Creates a function to end the quiz. Elements and text are removed and replaced wiht a final message that tells the user their score and gives them an option to save their high schore and see the top ten scores.
 function endQuiz() {
     questionEl.remove();
     answerEl.remove();
     currentScore.textContent = "Your Final Score is " + quizScore;
+    var saveBtn = document.createElement("button");
+    saveBtn.textContent = "High Scores"
+    scoreDiv.appendChild(saveBtn);
+    saveBtn.addEventListener("click", postFinalScore)
 };
 
+// Creates a function to post the user's final score. This function will remove the question and answer elements and provide a final score message.
+function postFinalScore() {
+    questionEl.remove();
+    answerEl.remove();
+    currentScore.textContent = "Your Final Score is " + quizScore;
+    
+    //Creates an input for the user to type their initials to be saved. 
+    var initialsInput = document.createElement("input");
+    initialsInput.setAttribute("type", "text");
+    initialsInput.setAttribute("placeholder", "Enter Initials");
+    scoreDiv.appendChild(initialsInput);
+    //Creates a button that will allow users to save their score.
+    var saveBtn = document.createElement("button");
+    saveBtn.textContent = "Save Score";
+    scoreDiv.append(saveBtn);
+    saveBtn.addEventListener("click", function() {
+        var userInitials = initialsInput.value.trim();
+        if (userInitials !== "") {
+            //Retrives highScores array from local storage and adds the new initials. Then, the initals are sorted by score.
+        highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+        highScores.push({initials: userInitials, score: quizScore});
+        highScores.sort(function (a,b){
+            return b.score - a.score
+        });
+        highScores = highScores.slice(0, 10);
+        //Saves user initials in local storage.
+        localStorage.setItem("highScores", JSON.stringify(highScores));
+        //Calls a function to display the high scores.
+        displayHighScores();
+        }
+    });
+}
+
+// Creates a funciton to display high scores array, which has already been sorted by score.
+function displayHighScores() {
+    scoreDiv.innerHTML = "<h2>Top 10 High Scores</h2>";
+    // Creates a list for the high score array objects.
+    var list = document.createElement("ol");
+    highScores.forEach(function (score, index) {
+        var li = document.createElement("li");
+        li.textContent = score.initials + ": " + score.score;
+        list.appendChild(li);
+    });
+    // Appends list
+    scoreDiv.appendChild(list);
+    // Creates a button to restart the game, which triggers a page reload.
+    var restart = document.createElement("button");
+    restart.textContent = "Click to Try Again";
+    scoreDiv.appendChild(restart);
+
+    restart.addEventListener("click", function() {
+        location.reload();
+    });
+};
