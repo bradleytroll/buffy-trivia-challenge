@@ -245,40 +245,52 @@ function endQuiz() {
     answerEl.remove();
     currentScore.textContent = "Your Final Score is " + quizScore;
     var saveBtn = document.createElement("button");
-    saveBtn.textContent = "High Scores"
+    saveBtn.textContent = "Click to Save Your Score";
     scoreDiv.appendChild(saveBtn);
-    saveBtn.addEventListener("click", postFinalScore)
-};
+    
+    saveBtn.addEventListener("click", postFinalScore);
 
-// Creates a function to post the user's final score. This function will remove the question and answer elements and provide a final score message.
+    // Hide the "High Scores" button after it's clicked
+    saveBtn.addEventListener("click", function() {
+        saveBtn.style.display = "none";
+    });
+}
+
+// Creates a function to post the user's final score.
 function postFinalScore() {
     questionEl.remove();
     answerEl.remove();
     currentScore.textContent = "Your Final Score is " + quizScore;
-    
-    //Creates an input for the user to type their initials to be saved. 
+
+    // Creates an input for the user to type their initials to be saved.
     var initialsInput = document.createElement("input");
     initialsInput.setAttribute("type", "text");
     initialsInput.setAttribute("placeholder", "Enter Initials");
+    initialsInput.style.height = "20px"
     scoreDiv.appendChild(initialsInput);
-    //Creates a button that will allow users to save their score.
+
+    // Creates a button that will allow users to save their score.
     var saveBtn = document.createElement("button");
     saveBtn.textContent = "Save Score";
-    scoreDiv.append(saveBtn);
+    scoreDiv.appendChild(saveBtn);
+
     saveBtn.addEventListener("click", function() {
         var userInitials = initialsInput.value.trim();
         if (userInitials !== "") {
-            //Retrives highScores array from local storage and adds the new initials. Then, the initals are sorted by score.
-        highScores = JSON.parse(localStorage.getItem("highScores")) || [];
-        highScores.push({initials: userInitials, score: quizScore});
-        highScores.sort(function (a,b){
-            return b.score - a.score
-        });
-        highScores = highScores.slice(0, 10);
-        //Saves user initials in local storage.
-        localStorage.setItem("highScores", JSON.stringify(highScores));
-        //Calls a function to display the high scores.
-        displayHighScores();
+            // Retrieves highScores array from local storage and adds the new initials. Then, the initials are sorted by score.
+            highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+            highScores.push({ initials: userInitials, score: quizScore });
+            highScores.sort(function(a, b) {
+                return b.score - a.score;
+            });
+            highScores = highScores.slice(0, 10);
+            // Saves user initials in local storage.
+            localStorage.setItem("highScores", JSON.stringify(highScores));
+            // Calls a function to display the high scores.
+            displayHighScores();
+            initialsInput.remove();
+            // Hide the "Save Score" button after it's clicked
+            saveBtn.style.display = "none";
         }
     });
 }
@@ -299,7 +311,6 @@ function displayHighScores() {
     var restart = document.createElement("button");
     restart.textContent = "Click to Try Again";
     scoreDiv.appendChild(restart);
-
     restart.addEventListener("click", function() {
         location.reload();
     });
