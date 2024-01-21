@@ -15,8 +15,10 @@ startBtn.addEventListener("click", startQuiz);
 
 // Adds a function to the start button that, when clicked, fires two new functions: one to begin the timer, and one to display the first question.
 function startQuiz(event) {
+    if (!timer) {
     startTimer();
     startQuestions();
+    }
 }
 
 
