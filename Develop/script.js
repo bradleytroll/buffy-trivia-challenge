@@ -114,7 +114,7 @@ var questions = [
 
 
 // Grabs elements and assign variables
-var questionEl = document.getElementById("question-div");
+var questionEl = document.getElementById("question");
 var startBtn = document.getElementById("start-button");
 var timerEl = document.getElementById("timer-element");
 var answerEl = document.getElementById("answer-options");
@@ -126,7 +126,7 @@ var message = document.getElementById("correct-incorrect-message")
 
 // Creates beginning timer count
 var timer;
-timerCount = 70;
+let timerCount = 70;
 
 // Creates starting quesiton count
 var currentQuestionIndex = 0;
@@ -188,12 +188,16 @@ function checkAnswer(index) {
     if (index === currentQuestion.correctIndex) {
         quizScore++;
         showCorrect();
-    } else {
+    } else if (timerCount >= 10) {
         timerCount -= 10;
         showIncorrect();
+    } else if (timerCount < 10) {
+        clearInterval(timer);
+        timerEl.textContent = "Time's Up!"
+        endQuiz();
+    }
     };
     
-}
 
 function showCorrect() {
     message.textContent = "Correct!"
@@ -223,6 +227,8 @@ function nextQuestion() {
 }
 
 function endQuiz() {
-    console.log('timer ended')
+    questionEl.remove();
+    answerEl.remove();
+    currentScore.textContent = "Your Final Score is " + quizScore;
 };
 
