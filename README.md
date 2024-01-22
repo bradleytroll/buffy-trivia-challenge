@@ -14,10 +14,22 @@ You may also access the deployed version of this application at
 
 ## Game Features
 
+<img src="./Develop/Assets/start-page.png" alt="Start Page" width="400" />
+
 - **Timer:** Players have a total of 70 seconds to answer as many questions as possible. Players have a limited amount of time to answer each question. Incorrect answers will deduct 10 seconds from the remaining time.
+
+<img src="./Develop/Assets/questions2.png" alt="Questions" width="400" />
+
 - **Score Tracking:** The current score is visible throughout the quiz.
+
+<img src="./Develop/Assets/question-increased-score.png" alt="Questions with Increased Score" width="400" />
+
 - **Sound Effects:** Enjoy correct and incorrect sound effects as you progress through the quiz.
 - **High Scores:** Save your final score and compete for a spot on the leaderboard!
+
+<img src="./Develop/Assets/click-to-save-score.png" alt="Save Score" width="400" />
+<img src="./Develop/Assets/enter-initials.png" alt="Enter Initials" width="400" />
+<img src="./Develop/Assets/high-scores.png" alt="High Scores" width="400" />
 
 ## How to Play
 
