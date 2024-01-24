@@ -114,7 +114,7 @@ button {
     text-align: left;
 }
 
-// Creates alternating backgroudn colors for the list items
+// Creates alternating background colors for the list items
 #high-score-div li:nth-child(odd) {
     background-color: bisque;
     padding: 10px;
@@ -123,4 +123,52 @@ button {
 #high-score-div li:nth-child(even) {
     
     background: gray;
+}
+
+// Creates media queries
+@media screen and (max-width: 768px) {
+    body {
+        background-size: cover;
+    }
+
+    #title, #question-div, #timer-element, #answer-options, #score {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    button {
+        font-size: 20px;
+    }
+
+    #title, #question-div, #timer-element, #answer-options, #score {
+        padding: 20px;
+    }
+
+    #question {
+        padding: 20px;
+    }
+}
+
+/* Media query for screens smaller than 480 pixels (e.g., smartphones) */
+@media screen and (max-width: 480px) {
+    body {
+        background-size: cover;
+    }
+
+    #title, #question-div, #timer-element, #answer-options, #score {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    button {
+        font-size: 18px;
+    }
+
+    #title, #question-div, #timer-element, #answer-options, #score {
+        padding: 15px;
+    }
+
+    #question {
+        padding: 15px;
+    }
 }
