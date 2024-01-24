@@ -1,7 +1,7 @@
 // Creates quiz questions through an array of objects
 var questions = [
     {
-        question: "What is the nickname of Buffy's slayer, Giles?",
+        question: "What is the nickname of Buffy's Watcher, Giles?",
         options: ["Bookworm", "Slasher", "Ripper", "Sage"],
         correctIndex: 2
     },
