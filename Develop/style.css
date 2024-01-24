@@ -125,7 +125,7 @@ button {
     background: gray;
 }
 
-// Creates media queries
+/* Creates media queries */
 @media screen and (max-width: 768px) {
     body {
         background-size: cover;
@@ -149,7 +149,7 @@ button {
     }
 }
 
-/* Media query for screens smaller than 480 pixels (e.g., smartphones) */
+/* Media query for screens smaller than 480 pixels */
 @media screen and (max-width: 480px) {
     body {
         background-size: cover;
